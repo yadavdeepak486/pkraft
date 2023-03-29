@@ -1,0 +1,397 @@
+<div class="w-full max-w-3xl">
+    <!-- Form -->
+    <form [formGroup]="accountForm" (ngSubmit)="submit()">
+        <!-- Section -->
+        <div class="w-full">
+            <div class="text-xl">Company</div>
+            <div class="text-secondary">
+                Company details for profile information.
+            </div>
+        </div>
+
+        <div class="grid sm:grid-cols-4 gap-6 w-full mt-4">
+            <div class="sm:col-span-1 mx-auto mt-6">
+                <!-- Avatar and actions -->
+                <div class="flex flex-auto items-end -mt-9">
+                    <div
+                        class="relative flex flex-col items-center justify-center w-32 h-32 rounded-full overflow-hidden ring-4 ring-bg-card"
+                    >
+                        <!-- Upload / Remove avatar -->
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 z-10"
+                        ></div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center z-20"
+                        >
+                            <div>
+                                <input
+                                    id="avatar-file-input"
+                                    class="absolute h-0 w-0 opacity-0 invisible pointer-events-none"
+                                    type="file"
+                                    [multiple]="false"
+                                    [accept]="'image/jpeg, image/png'"
+                                    (change)="
+                                        uploadAvatar(avatarFileInput.files)
+                                    "
+                                    #avatarFileInput
+                                />
+                                <label
+                                    class="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-hover"
+                                    for="avatar-file-input"
+                                    matRipple
+                                >
+                                    <mat-icon
+                                        class="text-white"
+                                        [svgIcon]="'heroicons_outline:camera'"
+                                    ></mat-icon>
+                                </label>
+                            </div>
+                            <div>
+                                <button
+                                    mat-icon-button
+                                    (click)="removeAvatar()"
+                                >
+                                    <mat-icon
+                                        class="text-white"
+                                        [svgIcon]="'heroicons_outline:trash'"
+                                    ></mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Image/Letter -->
+                        <img
+                            class="object-cover w-full h-full"
+                            *ngIf="contact?.avatar"
+                            [src]="contact?.avatar"
+                        />
+                        <div
+                            class="flex items-center justify-center w-full h-full rounded overflow-hidden uppercase text-8xl font-bold leading-none bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                            *ngIf="!contact?.avatar"
+                        >
+                            {{ contact.name.charAt(0) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="text-default text-center">Logo</div>
+            </div>
+
+            <!-- Name -->
+            <div class="sm:col-span-2">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Company Name</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:office-building'"
+                        matPrefix
+                    ></mat-icon>
+                    <input [formControlName]="'company_name'" matInput />
+                </mat-form-field>
+            </div>
+            <!-- Username -->
+            <!-- <div class="sm:col-span-4">
+                <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
+                    <mat-label>Username</mat-label>
+                    <div
+                        class="text-secondary"
+                        matPrefix>
+                        fusetheme.com/
+                    </div>
+                    <input
+                        [formControlName]="'username'"
+                        matInput>
+                </mat-form-field>
+            </div> -->
+            <!-- Title -->
+            <div class="sm:col-span-1">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Company Size</mat-label>
+                    <!-- <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:briefcase'"
+                        matPrefix></mat-icon> -->
+                    <input
+                        type="number"
+                        [formControlName]="'company_size'"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <!-- Company -->
+            <!-- <div class="sm:col-span-2">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Company</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:office-building'"
+                        matPrefix></mat-icon>
+                    <input
+                        [formControlName]="'company'"
+                        matInput>
+                </mat-form-field>
+            </div> -->
+            <!-- About -->
+            <!-- <div class="sm:col-span-4">
+                <mat-form-field class="fuse-mat-textarea fuse-mat-no-subscript w-full">
+                    <mat-label>About</mat-label>
+                    <textarea
+                        matInput
+                        [formControlName]="'about'"
+                        matTextareaAutosize
+                        [matAutosizeMinRows]="5"></textarea>
+                </mat-form-field>
+                <div class="mt-1 text-md text-hint">Brief description for your profile. Basic HTML and Emoji are allowed.</div>
+            </div> -->
+        </div>
+
+        <!-- Divider -->
+        <div class="my-7 border-t"></div>
+
+        <!-- Section -->
+        <div class="w-full">
+            <div class="text-xl">Personal Information</div>
+            <div class="text-secondary">
+                Communication details in case we want to connect with you. These
+                will be kept private.
+            </div>
+        </div>
+        <div class="mt-5 mb-0 border-t"></div>
+
+        <div class="sm:col-span-1 flex flex-col mt-6">
+            <!-- Avatar and actions -->
+            <div class="flex justify-end -mt-32">
+                <div
+                    class="relative flex flex-col items-center justify-center w-36 h-36 rounded overflow-hidden ring-4 ring-bg-card"
+                >
+                    <!-- Upload / Remove avatar -->
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-50 z-10"
+                    ></div>
+                    <div
+                        class="absolute inset-0 flex items-center justify-center z-20"
+                    >
+                        <div>
+                            <input
+                                id="avatar-file-input"
+                                class="absolute h-0 w-0 opacity-0 invisible pointer-events-none"
+                                type="file"
+                                [multiple]="false"
+                                [accept]="'image/jpeg, image/png'"
+                                (change)="uploadProfile(profileFileInput.files)"
+                                #profileFileInput
+                            />
+                            <label
+                                class="flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-hover"
+                                for="avatar-file-input"
+                                matRipple
+                            >
+                                <mat-icon
+                                    class="text-white"
+                                    [svgIcon]="'heroicons_outline:camera'"
+                                ></mat-icon>
+                            </label>
+                        </div>
+                        <div>
+                            <button mat-icon-button (click)="removeProfile()">
+                                <mat-icon
+                                    class="text-white"
+                                    [svgIcon]="'heroicons_outline:trash'"
+                                ></mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Image/Letter -->
+                    <img
+                        class="object-cover w-full h-full"
+                        *ngIf="contact?.profile"
+                        [src]="contact?.profile"
+                    />
+                    <div
+                        class="flex items-center justify-center w-full h-full rounded overflow-hidden uppercase text-8xl font-bold leading-none bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                        *ngIf="!contact?.profile"
+                    >
+                        {{ contact.name.charAt(0) }}
+                    </div>
+                </div>
+            </div>
+            <div class="text-default text-center flex justify-end mr-12">
+                Profile
+            </div>
+        </div>
+
+        <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+            <!-- Email -->
+            <div class="sm:col-span-3">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Name</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:user-circle'"
+                        matPrefix
+                    ></mat-icon>
+                    <input [formControlName]="'contact_person_name'" matInput />
+                </mat-form-field>
+            </div>
+            <!-- Phone -->
+            <div class="sm:col-span-1">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Designation</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:briefcase'"
+                        matPrefix
+                    ></mat-icon>
+                    <input
+                        [formControlName]="'contact_persons_designation'"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+
+            <!-- Email -->
+            <div class="sm:col-span-2">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Email</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:mail'"
+                        matPrefix
+                    ></mat-icon>
+                    <input [formControlName]="'email'" matInput />
+                </mat-form-field>
+            </div>
+            <!-- Phone -->
+            <div class="sm:col-span-2">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Mobile</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:phone'"
+                        matPrefix
+                    ></mat-icon>
+                    <input [formControlName]="'mobile'" matInput />
+                </mat-form-field>
+            </div>
+
+            <!-- Email -->
+            <div class="sm:col-span-2" *ngIf="!editmode">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Password</mat-label>
+                    <input
+                        type="password"
+                        [formControlName]="'password'"
+                        matInput
+                        #passwordField
+                    />
+                    <button
+                        mat-icon-button
+                        type="button"
+                        (click)="
+                            passwordField.type === 'password'
+                                ? (passwordField.type = 'text')
+                                : (passwordField.type = 'password')
+                        "
+                        matSuffix
+                    >
+                        <mat-icon
+                            class="icon-size-5"
+                            *ngIf="passwordField.type === 'password'"
+                            [svgIcon]="'heroicons_solid:eye'"
+                        ></mat-icon>
+                        <mat-icon
+                            class="icon-size-5"
+                            *ngIf="passwordField.type === 'text'"
+                            [svgIcon]="'heroicons_solid:eye-off'"
+                        ></mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <!-- Phone -->
+            <div class="sm:col-span-2" *ngIf="!editmode">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Confirm Password</mat-label>
+                    <input
+                        type="password"
+                        [formControlName]="'confirm_password'"
+                        matInput
+                        #confirmPasswordField
+                    />
+                    <button
+                        mat-icon-button
+                        type="button"
+                        (click)="
+                            confirmPasswordField.type === 'password'
+                                ? (confirmPasswordField.type = 'text')
+                                : (confirmPasswordField.type = 'password')
+                        "
+                        matSuffix
+                    >
+                        <mat-icon
+                            class="icon-size-5"
+                            *ngIf="confirmPasswordField.type === 'password'"
+                            [svgIcon]="'heroicons_solid:eye'"
+                        ></mat-icon>
+                        <mat-icon
+                            class="icon-size-5"
+                            *ngIf="confirmPasswordField.type === 'text'"
+                            [svgIcon]="'heroicons_solid:eye-off'"
+                        ></mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+
+            <!-- Country -->
+            <!-- <div class="sm:col-span-2">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Country</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:location-marker'"
+                        matPrefix
+                    ></mat-icon>
+                    <mat-select [formControlName]="'country'">
+                        <mat-option [value]="'usa'">United States</mat-option>
+                        <mat-option [value]="'canada'">Canada</mat-option>
+                        <mat-option [value]="'mexico'">Mexico</mat-option>
+                        <mat-option [value]="'france'">France</mat-option>
+                        <mat-option [value]="'germany'">Germany</mat-option>
+                        <mat-option [value]="'italy'">Italy</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> -->
+            <!-- Language -->
+            <!-- <div class="sm:col-span-2">
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Language</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:globe-alt'"
+                        matPrefix
+                    ></mat-icon>
+                    <mat-select [formControlName]="'language'">
+                        <mat-option [value]="'english'">English</mat-option>
+                        <mat-option [value]="'french'">French</mat-option>
+                        <mat-option [value]="'spanish'">Spanish</mat-option>
+                        <mat-option [value]="'german'">German</mat-option>
+                        <mat-option [value]="'italian'">Italian</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div> -->
+        </div>
+
+        <!-- Divider -->
+        <div class="mt-11 mb-10 border-t"></div>
+
+        <!-- Actions -->
+        <div class="flex items-center justify-end">
+            <button mat-stroked-button type="button" (click)="cancelForm()">Cancel</button>
+            <button
+                class="ml-4"
+                mat-flat-button
+                type="submit"
+                [color]="'primary'"
+            >
+                Save
+            </button>
+        </div>
+    </form>
+</div>

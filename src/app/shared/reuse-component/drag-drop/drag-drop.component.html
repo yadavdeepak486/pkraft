@@ -1,0 +1,112 @@
+<div class="flex-1"
+                                    appDnd
+                                    (fileDropped)="
+                                        fileBrowseandDropHandler(
+                                            $event,
+                                            fieldname
+                                        )
+                                    "
+                                    class="dropzone relative justify-center bg-card shadow-md hover:bg-hover rounded-2xl cursor-pointer items-center hover:shadow-xl transition-shadow duration-150 ease-in-out"
+                                    matRipple
+                                >
+                                    <input
+                                        type="file"
+                                        class="absolute opacity-0"
+                                        #fileDropRef
+                                        id="fileDropRef"
+                                        (change)="
+                                            fileBrowseandDropHandler(
+                                                $event.target.files,
+                                                fieldname
+                                            )
+                                        "
+                                    />
+                                    <div
+                                        *ngIf="!imagefiles[fieldname]"
+                                        class="p-10"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center p-4 rounded-full bg-primary-50 text-primary-700 dark:bg-primary dark:text-on-primary"
+                                        >
+                                            <mat-icon
+                                                class="text-current"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document-add'
+                                                "
+                                            ></mat-icon>
+                                            <h3
+                                                class="text-lg font-medium ml-1"
+                                            >
+                                            {{toSentenceCase(fieldname)}}
+                                            </h3>
+                                        </div>
+                                        <div
+                                            class="m-6 line-clamp-2 text-secondary"
+                                        >
+                                            Drag or Browse
+                                        </div>
+                                        <div
+                                            class="flex items-center mt-13 text-sm font-md"
+                                        >
+                                            <div class="text-secondary">
+                                                Supported file types:
+                                                <span class="ml-1"
+                                                    >{{supportedTypes}}</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="imagefiles[fieldname]"
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <button
+                                            mat-icon-button
+                                            (click)="viewImage(fieldname)"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:zoom-in'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="removeImage(fieldname)"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:trash'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="
+                                                downloadImage(fieldname)
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:download'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        *ngIf="imagefiles[fieldname]?.base64"
+                                        [src]="imagefiles[fieldname]?.base64"
+                                    />
+                                </div>
+                                <div
+                                    class="text-primary font-medium flex justify-center mt-2"
+                                >
+                                    <!-- Aadhar Front -->
+                                    {{toSentenceCase(fieldname)}}
+                                </div>
+
+                                <!-- <button mat-button (click)="sendValues()"> Send Data </button>  -->

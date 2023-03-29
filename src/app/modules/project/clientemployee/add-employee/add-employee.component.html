@@ -1,0 +1,1418 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent"
+    >
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate"
+                >
+                    Employee Registration
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+        <div>
+            <form
+                class="p-4 bg-card shadow rounded overflow-hidden"
+                [formGroup]="employeeStepperForm"
+            >
+                <mat-vertical-stepper #verticalStepper>
+                    <mat-step
+                        [formGroupName]="'basic'"
+                        [stepControl]="employeeStepperForm.get('basic')"
+                        #verticalStepperStep1
+                    >
+                        <ng-template matStepLabel
+                            >Basic information</ng-template
+                        >
+                        <p class="my-6 font-medium">
+                            Fill in your basic information
+                        </p>
+                        <div class="flex">
+                            <mat-form-field class="flex-auto">
+                                <mat-label>Email Address</mat-label>
+                                <input
+                                    matInput
+                                    [formControlName]="'email'"
+                                    [placeholder]="'Email Address'"
+                                />
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:mail'"
+                                ></mat-icon>
+                                <mat-error *ngIf="verticalStepperStep1.stepControl.get('email').hasError('required')">Email is required</mat-error>
+                                <mat-error *ngIf="verticalStepperStep1.stepControl.get('email').hasError('email')">Email is not valid</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex">
+                            <mat-form-field class="flex-auto">
+                                <mat-label>Mobile</mat-label>
+                                <input
+                                    matInput
+                                    [formControlName]="'mobile'"
+                                    [placeholder]="'Mobile'"
+                                />
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:device-mobile'"
+                                ></mat-icon>
+                                <mat-error *ngIf="verticalStepperStep1.stepControl.get('mobile').hasError('required')">Mobile is required</mat-error>
+                                <mat-error *ngIf="verticalStepperStep1.stepControl.get('mobile').hasError('minlength') || verticalStepperStep1.stepControl.get('mobile').hasError('maxlength') ">Mobile should be 10 digits</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex">
+                            <mat-form-field class="flex-auto">
+                                <mat-label>Alternate Mobile</mat-label>
+                                <input
+                                    matInput
+                                    [formControlName]="'alt_mobile'"
+                                    [placeholder]="'Alternate Mobile'"
+                                />
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="
+                                        'heroicons_outline:device-mobile'
+                                    "
+                                ></mat-icon>
+                                <mat-error *ngIf="verticalStepperStep1.stepControl.get('mobile').hasError('minlength') || verticalStepperStep1.stepControl.get('mobile').hasError('maxlength') ">Mobile should be 10 digits</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex justify-end">
+                            <button
+                                class="px-8"
+                                mat-flat-button
+                                [color]="'primary'"
+                                type="button"
+                                matStepperNext
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </mat-step>
+
+                    <mat-step
+                        [formGroupName]="'personal_detail'"
+                        [stepControl]="
+                            employeeStepperForm.get('personal_detail')
+                        "
+                        #verticalStepperStep2
+                    >
+                        <ng-template matStepLabel>Profile</ng-template>
+                        <p class="my-6 font-medium">Personal Details</p>
+                        <div class="flex flex-col gt-xs:flex-row">
+                            <mat-form-field class="flex-auto gt-xs:pr-3">
+                                <mat-label>Full Name</mat-label>
+                                <input
+                                    matInput
+                                    [formControlName]="'name'"
+                                    [placeholder]="'Name'"
+                                />
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_outline:user-circle'"
+                                ></mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="flex-auto gt-xs:pr-3">
+                                <mat-label>Father's Name</mat-label>
+                                <input
+                                    matInput
+                                    [formControlName]="'father_name'"
+                                    [placeholder]="'Father\'s Name'"
+                                />
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_solid:user-circle'"
+                                ></mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-wrap mb-3">
+                            <span class="font-medium mr-2">Gender</span>
+                            <mat-radio-group
+                                class="flex flex-wrap"
+                                [color]="'primary'"
+                                [formControlName]="'gender'"
+                            >
+                                <mat-radio-button class="mr-2" [value]="'Male'">
+                                    Male
+                                </mat-radio-button>
+                                <mat-radio-button
+                                    class="mr-2"
+                                    [value]="'Female'"
+                                >
+                                    Female
+                                </mat-radio-button>
+                                <mat-radio-button [value]="'Other'">
+                                    Other
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div class="flex">
+                            <mat-form-field class="flex-auto gt-xs:pr-3">
+                                <mat-label>Birth Date</mat-label>
+                                <mat-icon
+                                    matPrefix
+                                    class="icon-size-5"
+                                    [svgIcon]="'heroicons_solid:cake'"
+                                ></mat-icon>
+                                <input
+                                    matInput
+                                    [matDatepicker]="birthdayDatepicker"
+                                    [formControlName]="'birth_date'"
+                                    [placeholder]="'Birth Date'"
+                                />
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="birthdayDatepicker"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker
+                                    #birthdayDatepicker
+                                ></mat-datepicker>
+                            </mat-form-field>
+                            <!-- <p>{{verticalStepperStep2.stepControl.get("birth_date").value}}</p> -->
+                        </div>
+                        <div class="flex">
+                            <mat-form-field class="fuse-mat-textarea flex-auto">
+                                <mat-label>Permanent Address</mat-label>
+                                <textarea
+                                    matInput
+                                    [formControlName]="'permanent_address'"
+                                    [placeholder]="'Permanent Address'"
+                                    [rows]="3"
+                                ></textarea>
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="
+                                        'heroicons_outline:location-marker'
+                                    "
+                                ></mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex">
+                            <mat-form-field class="fuse-mat-textarea flex-auto">
+                                <mat-label>Current Address</mat-label>
+                                <textarea
+                                    matInput
+                                    [formControlName]="'current_address'"
+                                    [placeholder]="'Current Address'"
+                                    [rows]="3"
+                                ></textarea>
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="
+                                        'heroicons_solid:location-marker'
+                                    "
+                                ></mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex">
+                            <mat-form-field class="flex-auto">
+                                <mat-label
+                                    >Stay period at Permanent Address</mat-label
+                                >
+                                <input
+                                    class="text-right"
+                                    matInput
+                                    [formControlName]="
+                                        'stay_period_permanent_address'
+                                    "
+                                    [placeholder]="'Stay Period'"
+                                />
+                                <mat-select [value]="'yrs'" [formControlName]="
+                                'stay_period_type'
+                            " matSuffix>
+                                    <mat-option [value]="'yrs'">yrs</mat-option>
+                                    <mat-option [value]="'months'"
+                                        >months</mat-option
+                                    >
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex justify-end">
+                            <button
+                                class="px-8 mr-2"
+                                mat-flat-button
+                                [color]="'accent'"
+                                type="button"
+                                matStepperPrevious
+                            >
+                                Back
+                            </button>
+                            <button
+                                class="px-8"
+                                mat-flat-button
+                                [color]="'primary'"
+                                type="button"
+                                matStepperNext
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </mat-step>
+
+                    <!-- aadhar,pan,voter id -->
+
+                    <!-- [formGroupName]="'identity_proof'"
+                        [stepControl]="
+                            employeeStepperForm.get('identity_proof')
+                        " -->
+                    <mat-step
+                        
+                        #verticalStepperStep3
+                    >
+                        <ng-template matStepLabel>Identity Proof</ng-template>
+
+                        <p class="my-6 font-medium">
+                            Upload clear images of Aadhar front, back, PAN card
+                            Voter ID and Driving License.
+                        </p>
+                        <div class="flex gap-8 flex-wrap">
+                            <!-- <app-drag-drop fieldname="aadharFront" support="image"></app-drag-drop> -->
+                            <div class="flex-1">
+                                <div
+                                    appDnd
+                                    (fileDropped)="
+                                        fileBrowseandDropHandler(
+                                            $event,
+                                            'aadharFront'
+                                        )
+                                    "
+                                    class="dropzone relative justify-center bg-card shadow-md hover:bg-hover rounded-2xl cursor-pointer items-center hover:shadow-xl transition-shadow duration-150 ease-in-out"
+                                    matRipple
+                                >
+                                    <input
+                                        type="file"
+                                        class="absolute opacity-0"
+                                        #fileDropRef
+                                        id="fileDropRef"
+                                        (change)="
+                                            fileBrowseandDropHandler(
+                                                $event.target.files,
+                                                'aadharFront'
+                                            )
+                                        "
+                                    />
+                                    <div
+                                        *ngIf="!imagefiles?.aadharFront"
+                                        class="p-10"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center p-4 rounded-full bg-primary-50 text-primary-700 dark:bg-primary dark:text-on-primary"
+                                        >
+                                            <mat-icon
+                                                class="text-current"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document-add'
+                                                "
+                                            ></mat-icon>
+                                            <h3
+                                                class="text-lg font-medium ml-1"
+                                            >
+                                                Aadhar Front
+                                            </h3>
+                                        </div>
+                                        <div
+                                            class="m-6 line-clamp-2 text-secondary"
+                                        >
+                                            Drag or Browse
+                                        </div>
+                                        <div
+                                            class="flex items-center mt-13 text-sm font-md"
+                                        >
+                                            <div class="text-secondary">
+                                                Supported file types:
+                                                <span class="ml-1"
+                                                    >JPG, JPEG, PNG</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="imagefiles?.aadharFront"
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <button
+                                            mat-icon-button
+                                            (click)="viewImage('aadharFront')"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:zoom-in'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="removeImage('aadharFront')"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:trash'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        *ngIf="imagefiles?.aadharFront?.base64"
+                                        [src]="imagefiles?.aadharFront?.base64"
+                                    />
+                                </div>
+                                <div
+                                    class="text-primary font-medium flex justify-center mt-2"
+                                >
+                                    Aadhar Front
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div
+                                    appDnd
+                                    (fileDropped)="
+                                        fileBrowseandDropHandler(
+                                            $event,
+                                            'aadharBack'
+                                        )
+                                    "
+                                    class="dropzone relative justify-center bg-card shadow-md hover:bg-hover rounded-2xl cursor-pointer items-center hover:shadow-xl transition-shadow duration-150 ease-in-out"
+                                    matRipple
+                                >
+                                    <input
+                                        type="file"
+                                        class="absolute opacity-0"
+                                        #fileDropRef
+                                        id="fileDropRef"
+                                        (change)="
+                                            fileBrowseandDropHandler(
+                                                $event.target.files,
+                                                'aadharBack'
+                                            )
+                                        "
+                                    />
+                                    <div
+                                        *ngIf="!imagefiles?.aadharBack"
+                                        class="p-10"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center p-4 rounded-full bg-primary-50 text-primary-700 dark:bg-primary dark:text-on-primary"
+                                        >
+                                            <mat-icon
+                                                class="text-current"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document-add'
+                                                "
+                                            ></mat-icon>
+                                            <h3
+                                                class="text-lg font-medium ml-1"
+                                            >
+                                                Aadhar Back
+                                            </h3>
+                                        </div>
+                                        <div
+                                            class="m-6 line-clamp-2 text-secondary"
+                                        >
+                                            Drag or Browse
+                                        </div>
+                                        <div
+                                            class="flex items-center mt-13 text-sm font-md"
+                                        >
+                                            <div class="text-secondary">
+                                                Supported file types:
+                                                <span class="ml-1"
+                                                    >JPG, JPEG, PNG</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="imagefiles?.aadharBack"
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <button
+                                            mat-icon-button
+                                            (click)="viewImage('aadharBack')"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:zoom-in'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="removeImage('aadharBack')"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:trash'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        *ngIf="imagefiles?.aadharBack?.base64"
+                                        [src]="imagefiles?.aadharBack?.base64"
+                                    />
+                                </div>
+                                <div
+                                    class="text-primary font-medium flex justify-center mt-2"
+                                >
+                                    Aadhar Back
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div
+                                    appDnd
+                                    (fileDropped)="
+                                        fileBrowseandDropHandler(
+                                            $event,
+                                            'panCard'
+                                        )
+                                    "
+                                    class="dropzone relative justify-center bg-card shadow-md hover:bg-hover rounded-2xl cursor-pointer items-center hover:shadow-xl transition-shadow duration-150 ease-in-out"
+                                    matRipple
+                                >
+                                    <input
+                                        type="file"
+                                        class="absolute opacity-0"
+                                        #fileDropRef
+                                        id="fileDropRef"
+                                        (change)="
+                                            fileBrowseandDropHandler(
+                                                $event.target.files,
+                                                'panCard'
+                                            )
+                                        "
+                                    />
+                                    <div
+                                        *ngIf="!imagefiles?.panCard"
+                                        class="p-10"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center p-4 rounded-full bg-primary-50 text-primary-700 dark:bg-primary dark:text-on-primary"
+                                        >
+                                            <mat-icon
+                                                class="text-current"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document-add'
+                                                "
+                                            ></mat-icon>
+                                            <h3
+                                                class="text-lg font-medium ml-1"
+                                            >
+                                                PAN Card
+                                            </h3>
+                                        </div>
+                                        <div
+                                            class="m-6 line-clamp-2 text-secondary"
+                                        >
+                                            Drag or Browse
+                                        </div>
+                                        <div
+                                            class="flex items-center mt-13 text-sm font-md"
+                                        >
+                                            <div class="text-secondary">
+                                                Supported file types:
+                                                <span class="ml-1"
+                                                    >JPG, JPEG, PNG</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="imagefiles?.panCard"
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <button
+                                            mat-icon-button
+                                            (click)="viewImage('panCard')"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:zoom-in'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="removeImage('panCard')"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:trash'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        *ngIf="imagefiles?.panCard?.base64"
+                                        [src]="imagefiles?.panCard?.base64"
+                                    />
+                                </div>
+                                <div
+                                    class="text-primary font-medium flex justify-center mt-2"
+                                >
+                                    PAN card
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-8 mt-9 flex-wrap">
+                            <div class="flex-1">
+                                <div
+                                    appDnd
+                                    (fileDropped)="
+                                        fileBrowseandDropHandler(
+                                            $event,
+                                            'voterId'
+                                        )
+                                    "
+                                    class="dropzone relative justify-center bg-card shadow-md hover:bg-hover rounded-2xl cursor-pointer items-center hover:shadow-xl transition-shadow duration-150 ease-in-out"
+                                    matRipple
+                                >
+                                    <input
+                                        type="file"
+                                        class="absolute opacity-0"
+                                        #fileDropRef
+                                        id="fileDropRef"
+                                        (change)="
+                                            fileBrowseandDropHandler(
+                                                $event.target.files,
+                                                'voterId'
+                                            )
+                                        "
+                                    />
+                                    <div
+                                        *ngIf="!imagefiles?.voterId"
+                                        class="p-10"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center p-4 rounded-full bg-primary-50 text-primary-700 dark:bg-primary dark:text-on-primary"
+                                        >
+                                            <mat-icon
+                                                class="text-current"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document-add'
+                                                "
+                                            ></mat-icon>
+                                            <h3
+                                                class="text-lg font-medium ml-1"
+                                            >
+                                                Voter ID Card
+                                            </h3>
+                                        </div>
+                                        <div
+                                            class="m-6 line-clamp-2 text-secondary"
+                                        >
+                                            Drag or Browse
+                                        </div>
+                                        <div
+                                            class="flex items-center mt-13 text-sm font-md"
+                                        >
+                                            <div class="text-secondary">
+                                                Supported file types:
+                                                <span class="ml-1"
+                                                    >JPG, JPEG, PNG</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="imagefiles?.voterId"
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <button
+                                            mat-icon-button
+                                            (click)="viewImage('voterId')"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:zoom-in'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="removeImage('voterId')"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:trash'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        *ngIf="imagefiles?.voterId?.base64"
+                                        [src]="imagefiles?.voterId?.base64"
+                                    />
+                                </div>
+                                <div
+                                    class="text-primary font-medium flex justify-center mt-2"
+                                >
+                                    Voter ID card
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div
+                                    appDnd
+                                    (fileDropped)="
+                                        fileBrowseandDropHandler(
+                                            $event,
+                                            'drivingLicense'
+                                        )
+                                    "
+                                    class="dropzone relative justify-center bg-card shadow-md hover:bg-hover rounded-2xl cursor-pointer items-center hover:shadow-xl transition-shadow duration-150 ease-in-out"
+                                    matRipple
+                                >
+                                    <input
+                                        type="file"
+                                        class="absolute opacity-0"
+                                        #fileDropRef
+                                        id="fileDropRef"
+                                        (change)="
+                                            fileBrowseandDropHandler(
+                                                $event.target.files,
+                                                'drivingLicense'
+                                            )
+                                        "
+                                    />
+                                    <div
+                                        *ngIf="!imagefiles?.drivingLicense"
+                                        class="p-10"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center p-4 rounded-full bg-primary-50 text-primary-700 dark:bg-primary dark:text-on-primary"
+                                        >
+                                            <mat-icon
+                                                class="text-current"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document-add'
+                                                "
+                                            ></mat-icon>
+                                            <h3
+                                                class="text-lg font-medium ml-1"
+                                            >
+                                                Driving Lic
+                                            </h3>
+                                        </div>
+                                        <div
+                                            class="m-6 line-clamp-2 text-secondary"
+                                        >
+                                            Drag or Browse
+                                        </div>
+                                        <div
+                                            class="flex items-center mt-13 text-sm font-md"
+                                        >
+                                            <div class="text-secondary">
+                                                Supported file types:
+                                                <span class="ml-1"
+                                                    >JPG, JPEG, PNG</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="imagefiles?.drivingLicense"
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <button
+                                            mat-icon-button
+                                            (click)="
+                                                viewImage('drivingLicense')
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:zoom-in'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="
+                                                removeImage('drivingLicense')
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:trash'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        *ngIf="
+                                            imagefiles?.drivingLicense?.base64
+                                        "
+                                        [src]="
+                                            imagefiles?.drivingLicense?.base64
+                                        "
+                                    />
+                                </div>
+                                <div
+                                    class="text-primary font-medium flex justify-center mt-2"
+                                >
+                                    Driving License
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-end mt-8">
+                            <button
+                                class="px-8 mr-2"
+                                mat-flat-button
+                                [color]="'accent'"
+                                type="button"
+                                matStepperPrevious
+                            >
+                                Back
+                            </button>
+                            <button
+                                class="px-8"
+                                mat-flat-button
+                                [color]="'primary'"
+                                type="button"
+                                matStepperNext
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </mat-step>
+
+                    <!-- Highest Qualification Certificate ,all years marksheet, final degree pdf format,  -->
+
+                    <!-- [formGroupName]="'qualification'"
+                        [stepControl]="employeeStepperForm.get('qualification')" -->
+
+                    <mat-step
+                        
+                        #verticalStepperStep4
+                    >
+                        <ng-template matStepLabel>Qualification</ng-template>
+
+                        <p class="my-6 font-medium">
+                            Add all years marksheet, and final degree in one
+                            pdf.
+                        </p>
+                        <div class="flex gap-8 flex-wrap">
+                            <div class="flex-1">
+                                <div
+                                    appDnd
+                                    (fileDropped)="
+                                        fileBrowseandDropHandler(
+                                            $event,
+                                            'qualificationCert'
+                                        )
+                                    "
+                                    class="dropzone relative justify-center bg-card shadow-md hover:bg-hover rounded-2xl cursor-pointer items-center hover:shadow-xl transition-shadow duration-150 ease-in-out"
+                                    matRipple
+                                >
+                                    <input
+                                        type="file"
+                                        class="absolute opacity-0"
+                                        #fileDropRef
+                                        id="fileDropRef"
+                                        (change)="
+                                            fileBrowseandDropHandler(
+                                                $event.target.files,
+                                                'qualificationCert'
+                                            )
+                                        "
+                                    />
+                                    <div
+                                        *ngIf="!imagefiles?.qualificationCert"
+                                        class="p-10"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center p-4 rounded-full bg-primary-50 text-primary-700 dark:bg-primary dark:text-on-primary"
+                                        >
+                                            <mat-icon
+                                                class="text-current"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document-add'
+                                                "
+                                            ></mat-icon>
+                                            <h3
+                                                class="text-lg font-medium ml-1"
+                                            >
+                                                Qualification
+                                            </h3>
+                                        </div>
+                                        <div
+                                            class="m-6 line-clamp-2 text-secondary"
+                                        >
+                                            Drag or Browse
+                                        </div>
+                                        <div
+                                            class="flex items-center mt-13 text-sm font-md"
+                                        >
+                                            <div class="text-secondary">
+                                                Supported file types:
+                                                <span class="ml-1">PDF</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="imagefiles?.qualificationCert"
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <button
+                                            mat-icon-button
+                                            (click)="
+                                                viewImage('qualificationCert')
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:zoom-in'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="
+                                                removeImage('qualificationCert')
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:trash'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        *ngIf="
+                                            imagefiles?.qualificationCert
+                                                ?.base64
+                                        "
+                                        [src]="
+                                            imagefiles?.qualificationCert
+                                                ?.base64
+                                        "
+                                    />
+                                </div>
+                                <div
+                                    class="text-primary font-medium flex justify-center mt-2"
+                                >
+                                    Highest Qualification
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-end mt-8">
+                            <button
+                                class="px-8 mr-2"
+                                mat-flat-button
+                                [color]="'accent'"
+                                type="button"
+                                matStepperPrevious
+                            >
+                                Back
+                            </button>
+                            <button
+                                class="px-8"
+                                mat-flat-button
+                                [color]="'primary'"
+                                type="button"
+                                matStepperNext
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </mat-step>
+
+                    <!-- Experience Certificate upto 3 companies, company name,  -->
+                    <mat-step
+                        [formGroupName]="'experience'"
+                        [stepControl]="employeeStepperForm.get('experience')"
+                        #verticalStepperStep5
+                    >
+                        <ng-template matStepLabel
+                            >Experience Certificate</ng-template
+                        >
+
+                        <p class="my-6 font-medium">
+                            Add the previous companies you have worked in.
+                        </p>
+                        <div class="flex">
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="
+                                        'previous_company_name_one'
+                                    "
+                                    [placeholder]="'Previous Company Name 1'"
+                                />
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_outline:briefcase'"
+                                ></mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex">
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="
+                                        'previous_company_name_two'
+                                    "
+                                    [placeholder]="'Previous Company Name 2'"
+                                />
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_outline:briefcase'"
+                                ></mat-icon>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="flex">
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="
+                                        'previous_company_name_three'
+                                    "
+                                    [placeholder]="'Previous Company Name 3'"
+                                />
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_outline:briefcase'"
+                                ></mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex gap-8 flex-wrap">
+                            <div class="flex-1">
+                                <div
+                                    appDnd
+                                    (fileDropped)="
+                                        fileBrowseandDropHandler(
+                                            $event,
+                                            'expLetterOne'
+                                        )
+                                    "
+                                    class="dropzone relative justify-center bg-card shadow-md hover:bg-hover rounded-2xl cursor-pointer items-center hover:shadow-xl transition-shadow duration-150 ease-in-out"
+                                    matRipple
+                                >
+                                    <input
+                                        type="file"
+                                        class="absolute opacity-0"
+                                        #fileDropRef
+                                        id="fileDropRef"
+                                        (change)="
+                                            fileBrowseandDropHandler(
+                                                $event.target.files,
+                                                'expLetterOne'
+                                            )
+                                        "
+                                    />
+                                    <div
+                                        *ngIf="!imagefiles?.expLetterOne"
+                                        class="p-10"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center p-4 rounded-full bg-primary-50 text-primary-700 dark:bg-primary dark:text-on-primary"
+                                        >
+                                            <mat-icon
+                                                class="text-current"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document-add'
+                                                "
+                                            ></mat-icon>
+                                            <h3
+                                                class="text-lg font-medium ml-1"
+                                            >
+                                                Experience Company 1
+                                            </h3>
+                                        </div>
+                                        <div
+                                            class="m-6 line-clamp-2 text-secondary"
+                                        >
+                                            Drag or Browse
+                                        </div>
+                                        <div
+                                            class="flex items-center mt-13 text-sm font-md"
+                                        >
+                                            <div class="text-secondary">
+                                                Supported file types:
+                                                <span class="ml-1"
+                                                    >JPG, JPEG, PNG</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="imagefiles?.expLetterOne"
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <button
+                                            mat-icon-button
+                                            (click)="viewImage('expLetterOne')"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:zoom-in'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="
+                                                removeImage('expLetterOne')
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:trash'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        *ngIf="imagefiles?.expLetterOne?.base64"
+                                        [src]="imagefiles?.expLetterOne?.base64"
+                                    />
+                                </div>
+                                <div
+                                    class="text-primary font-medium flex justify-center mt-2"
+                                >
+                                    Experience Company 1
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div
+                                    appDnd
+                                    (fileDropped)="
+                                        fileBrowseandDropHandler(
+                                            $event,
+                                            'expLetterTwo'
+                                        )
+                                    "
+                                    class="dropzone relative justify-center bg-card shadow-md hover:bg-hover rounded-2xl cursor-pointer items-center hover:shadow-xl transition-shadow duration-150 ease-in-out"
+                                    matRipple
+                                >
+                                    <input
+                                        type="file"
+                                        class="absolute opacity-0"
+                                        #fileDropRef
+                                        id="fileDropRef"
+                                        (change)="
+                                            fileBrowseandDropHandler(
+                                                $event.target.files,
+                                                'expLetterTwo'
+                                            )
+                                        "
+                                    />
+                                    <div
+                                        *ngIf="!imagefiles?.expLetterTwo"
+                                        class="p-10"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center p-4 rounded-full bg-primary-50 text-primary-700 dark:bg-primary dark:text-on-primary"
+                                        >
+                                            <mat-icon
+                                                class="text-current"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document-add'
+                                                "
+                                            ></mat-icon>
+                                            <h3
+                                                class="text-lg font-medium ml-1"
+                                            >
+                                                Experience Company 2
+                                            </h3>
+                                        </div>
+                                        <div
+                                            class="m-6 line-clamp-2 text-secondary"
+                                        >
+                                            Drag or Browse
+                                        </div>
+                                        <div
+                                            class="flex items-center mt-13 text-sm font-md"
+                                        >
+                                            <div class="text-secondary">
+                                                Supported file types:
+                                                <span class="ml-1"
+                                                    >JPG, JPEG, PNG</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="imagefiles?.expLetterTwo"
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <button
+                                            mat-icon-button
+                                            (click)="viewImage('expLetterTwo')"
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:zoom-in'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="
+                                                removeImage('expLetterTwo')
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:trash'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        *ngIf="imagefiles?.expLetterTwo?.base64"
+                                        [src]="imagefiles?.expLetterTwo?.base64"
+                                    />
+                                </div>
+                                <div
+                                    class="text-primary font-medium flex justify-center mt-2"
+                                >
+                                    Experience Company 1
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div
+                                    appDnd
+                                    (fileDropped)="
+                                        fileBrowseandDropHandler(
+                                            $event,
+                                            'expLetterThree'
+                                        )
+                                    "
+                                    class="dropzone relative justify-center bg-card shadow-md hover:bg-hover rounded-2xl cursor-pointer items-center hover:shadow-xl transition-shadow duration-150 ease-in-out"
+                                    matRipple
+                                >
+                                    <input
+                                        type="file"
+                                        class="absolute opacity-0"
+                                        #fileDropRef
+                                        id="fileDropRef"
+                                        (change)="
+                                            fileBrowseandDropHandler(
+                                                $event.target.files,
+                                                'expLetterThree'
+                                            )
+                                        "
+                                    />
+                                    <div
+                                        *ngIf="!imagefiles?.expLetterThree"
+                                        class="p-10"
+                                    >
+                                        <div
+                                            class="flex items-center justify-center p-4 rounded-full bg-primary-50 text-primary-700 dark:bg-primary dark:text-on-primary"
+                                        >
+                                            <mat-icon
+                                                class="text-current"
+                                                [svgIcon]="
+                                                    'heroicons_solid:document-add'
+                                                "
+                                            ></mat-icon>
+                                            <h3
+                                                class="text-lg font-medium ml-1"
+                                            >
+                                                Experience Company 3
+                                            </h3>
+                                        </div>
+                                        <div
+                                            class="m-6 line-clamp-2 text-secondary"
+                                        >
+                                            Drag or Browse
+                                        </div>
+                                        <div
+                                            class="flex items-center mt-13 text-sm font-md"
+                                        >
+                                            <div class="text-secondary">
+                                                Supported file types:
+                                                <span class="ml-1"
+                                                    >JPG, JPEG, PNG</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        *ngIf="imagefiles?.expLetterThree"
+                                        class="absolute inset-0 flex items-center justify-center z-20"
+                                    >
+                                        <button
+                                            mat-icon-button
+                                            (click)="
+                                                viewImage('expLetterThree')
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:zoom-in'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                        <button
+                                            mat-icon-button
+                                            (click)="
+                                                removeImage('expLetterThree')
+                                            "
+                                        >
+                                            <mat-icon
+                                                class="text-white"
+                                                [svgIcon]="
+                                                    'heroicons_outline:trash'
+                                                "
+                                            ></mat-icon>
+                                        </button>
+                                    </div>
+                                    <img
+                                        class="object-cover w-full h-full"
+                                        *ngIf="
+                                            imagefiles?.expLetterThree?.base64
+                                        "
+                                        [src]="
+                                            imagefiles?.expLetterThree?.base64
+                                        "
+                                    />
+                                </div>
+                                <div
+                                    class="text-primary font-medium flex justify-center mt-2"
+                                >
+                                    Experience Company 3
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-end mt-8">
+                            <button
+                                class="px-8 mr-2"
+                                mat-flat-button
+                                [color]="'accent'"
+                                type="button"
+                                matStepperPrevious
+                            >
+                                Back
+                            </button>
+                            <button
+                                class="px-8"
+                                mat-flat-button
+                                [color]="'primary'"
+                                type="button"
+                                matStepperNext
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </mat-step>
+                    <!-- UAN No. -->
+                    <mat-step
+                        [formGroupName]="'uan_no'"
+                        [stepControl]="employeeStepperForm.get('uan_no')"
+                        #verticalStepperStep6
+                    >
+                        <ng-template matStepLabel>UAN No.</ng-template>
+
+                        <p class="my-6 font-medium">Add UAN Number</p>
+                        <div class="flex">
+                            <mat-form-field class="flex-auto">
+                                <input
+                                    matInput
+                                    [formControlName]="'uan_num'"
+                                    [placeholder]="'UAN Number'"
+                                />
+                                <mat-icon
+                                    class="icon-size-5"
+                                    matPrefix
+                                    [svgIcon]="'heroicons_outline:briefcase'"
+                                ></mat-icon>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex justify-end mt-8">
+                            <button
+                                class="px-8 mr-2"
+                                mat-flat-button
+                                [color]="'accent'"
+                                *ngIf="!savingStatus"
+                                type="button"
+                                matStepperPrevious
+                            >
+                                Back
+                            </button>
+                            <button
+                                *ngIf="!savingStatus"
+                                class="px-8 mr-2"
+                                mat-flat-button
+                                [color]="'primary'"
+                                type="submit"
+                                (click)="save()"
+                            >
+                                Save
+                            </button>
+                            
+                            <button
+                                type="button"
+                                mat-flat-button
+                                *ngIf="savingStatus && !saved"
+                                class="px-8 mr-2"
+                                [color]="'primary'"
+                            >
+                                <mat-progress-spinner
+                                    class="mr-3 animate-spin z-20"
+                                    [mode]="'indeterminate'"
+                                    [diameter]="20"
+                                >
+                                </mat-progress-spinner>
+                                Processing...
+                            </button>
+                            <button
+                                class="px-8 mr-2"
+                                *ngIf="saved"
+                                mat-flat-button
+                                [color]="'accent'"
+                                type="button"
+                            >
+                                ( Redirecting in {{delay}} ) Saved!
+                            </button>
+                        </div>
+                    </mat-step>
+                </mat-vertical-stepper>
+            </form>
+        </div>
+    </div>
+</div>

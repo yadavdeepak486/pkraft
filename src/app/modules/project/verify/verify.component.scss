@@ -1,0 +1,14 @@
+@import "photoviewer/dist/photoviewer.css";
+
+.employee-grid {
+    grid-template-columns: 48px 80px auto 195px;
+    @screen sm {
+        grid-template-columns: 48px 120px auto 195px;
+    }
+    @screen md {
+        grid-template-columns: 48px 120px auto 195px;
+    }
+    @screen lg {
+        grid-template-columns: 48px 160px 220px 120px 48px 195px;
+    }
+}

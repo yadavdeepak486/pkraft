@@ -1,0 +1,28 @@
+@import 'photoviewer/dist/photoviewer.css';
+
+
+.inventory-grid {
+    grid-template-columns: 48px auto 40px;
+    @screen sm {
+        grid-template-columns: 48px auto 112px 72px;
+    }
+    @screen md {
+        grid-template-columns: 48px 112px auto 112px 72px;
+    }
+    @screen lg {
+        grid-template-columns: 48px 112px auto 112px 96px 96px 72px;
+    }
+}
+
+.client-grid {
+    grid-template-columns: 48px auto 40px;
+    @screen sm {
+        grid-template-columns: 48px auto 112px 72px;
+    }
+    @screen md {
+        grid-template-columns: 48px 112px auto 112px 72px;
+    }
+    @screen lg {
+        grid-template-columns: 48px 160px 50px 250px 180px 48px 120px 48px 159px;
+    }  
+}
